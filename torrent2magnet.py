@@ -2,10 +2,21 @@ import bencode
 import hashlib
 import os
 import pyperclip
+import sys
 from urllib.parse import quote
 
 data_dir = r"C:\Users\KING\Downloads"
+###print(sys.argv)
 
+if len(sys.argv)==2:
+    if os.path.isdir(sys.argv[1]):
+        ###print(sys.argv[1])
+        data_dir = sys.argv[1]
+    elif os.path.isfile(sys.argv[1]):
+        ###print(os.path.dirname(sys.argv[1]))
+        data_dir = os.path.dirname(sys.argv[1])
+
+###os.system("pause")
 
 torrent=[]
 magnet=[]
