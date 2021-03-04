@@ -12,6 +12,6 @@ Windows Registry Editor Version 5.00
 
 
 [HKEY_CLASSES_ROOT\Torrent.Document\shell\open\command]
-@="\"C:\\Windows\\py.exe\" \"C:\\Users\\KING\\Desktop\\torrent2mag.py\" \"%1\""
+@="\"C:\\Windows\\py.exe\" \"C:\\Users\\KING\\Desktop\\torrent2magnet.py\" \"%1\""
 
 ---------------------------------------
