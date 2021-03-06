@@ -1,6 +1,19 @@
 # torrent2magnet
 种子文件批量转换成磁力链
 
+运行前需要安装依赖
+pip install bencode.py
+Pip install pyperclip
+
+可以打包成可执行程序
+
+Pip install pyinstaller
+Pyinstaller -F torrent2magnet.py
+
+
+
+
+
 注册表可以直接关联 Torrent 文件
 -----------------------------------
 
