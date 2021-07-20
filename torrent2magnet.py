@@ -1,3 +1,25 @@
+######################################
+#种子文件批量转换成磁力链
+#运行前需要安装依赖
+
+#  pip install bencode.py
+
+#  Pip install pyperclip
+
+#可以打包成可执行程序
+
+#  Pip install pyinstaller
+
+#  Pyinstaller -F torrent2magnet.py
+######################################
+
+
+#import sys,os
+
+
+#print(r'C:\Windows\py.exe "'+ __file__ +r'" %1')
+
+import winreg
 import bencode
 import hashlib
 import os
@@ -5,7 +27,10 @@ import pyperclip
 import sys
 from urllib.parse import quote
 
-data_dir = r"C:\Users\KING\Downloads"
+winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r".torrent",winreg.REG_SZ,r"Torrent.Document")
+winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r"Torrent.Document\shell\open\command",winreg.REG_SZ,r'C:\Windows\py.exe "'+ __file__ +r'" %1')
+print(r'C:\Windows\py.exe "'+ __file__ +r'" %1')
+data_dir = os.environ['USERPROFILE']+'\Downloads'
 ###print(sys.argv)
 
 if len(sys.argv)==2:
@@ -77,7 +102,7 @@ txt=""
 for l in magnet:
     print(l)
     txt=l+'\n'+txt
-print("共转换了",len(magnet),"个链接")
+print("转换成功",len(magnet),"个磁力链接")
 pyperclip.copy(txt)
 os.system("pause")
 for i in torrent:
