@@ -1,4 +1,4 @@
-#######################################
+######################################
 #种子文件批量转换成磁力链
 #运行前需要安装依赖
 
@@ -11,7 +11,7 @@
 #  Pip install pyinstaller
 
 #  Pyinstaller -F torrent2magnet.py
-#######################################
+######################################
 
 
 #import sys,os
@@ -27,9 +27,7 @@ import pyperclip
 import sys
 from urllib.parse import quote
 
-winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r".torrent",winreg.REG_SZ,r"Torrent.Document")
-winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r"Torrent.Document\shell\open\command",winreg.REG_SZ,r'C:\Windows\py.exe "'+ __file__ +r'" %1')
-print(r'C:\Windows\py.exe "'+ __file__ +r'" %1')
+
 data_dir = os.environ['USERPROFILE']+'\Downloads'
 ###print(sys.argv)
 
@@ -40,6 +38,16 @@ if len(sys.argv)==2:
     elif os.path.isfile(sys.argv[1]):
         ###print(os.path.dirname(sys.argv[1]))
         data_dir = os.path.dirname(sys.argv[1])
+else:
+    try:
+        winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r".torrent",winreg.REG_SZ,r"Torrent.Document")
+        winreg.SetValue(winreg.HKEY_CLASSES_ROOT, r"Torrent.Document\shell\open\command",winreg.REG_SZ,sys.executable+r' "'+ __file__ +r'" %1')
+        print(sys.executable+r' "'+ __file__ +r'" %1')
+        print("已成功关联种子文件")
+    except:
+        print('请在“以管理员身份运行”的CMD窗口中调用本程序，命令行如下： \npy "'+__file__+'"')
+        print('如果已经可以正常双击“种子”文件进行转换，请忽略！')
+        print('')
 
 ###os.system("pause")
 
@@ -102,8 +110,9 @@ txt=""
 for l in magnet:
     print(l)
     txt=l+'\n'+txt
-print("转换成功",len(magnet),"个磁力链接")
+print("成功转换",len(magnet),"个磁力链接")
 pyperclip.copy(txt)
 os.system("pause")
 for i in torrent:
     os.remove(i)
+
